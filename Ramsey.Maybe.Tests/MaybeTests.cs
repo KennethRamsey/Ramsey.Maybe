@@ -176,6 +176,7 @@ namespace Ramsey.Maybe.Tests
                 return x;
             }
 
+
             string s = null;
 
             var newS =
@@ -183,6 +184,11 @@ namespace Ramsey.Maybe.Tests
                 select fun(s);
 
             Assert.AreEqual(calledFunciton, false);
+
+            s = "";
+            newS = s.ToMaybe().Select(fun);
+
+            Assert.AreEqual(calledFunciton, true);
         }
     }
 }
