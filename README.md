@@ -2,7 +2,7 @@
 C# Maybe monad
 
 
-Inspired by haskell's maybe monad, I've created the ma be monad in C#. What makes monads a lot more manageable in haskell is its special syntax for monad, which C# supports an very similar syntax, query expression syntax, which has been overloaded in this library to support Maybe objects.
+Inspired by haskell's maybe monad, I've created the maybe monad in C#. What makes monads a lot more manageable in haskell is its special syntax for monad, which C# supports a very similar syntax, query expression syntax, which has been overloaded in this library to support Maybe objects.
 
 A Maybe can either be a value or null. To convert something to a maybe, just call the .ToMaybe() extension method. A Maybe isn't guaranteed to have a value, so to get a value you have to use the extension .ValueOrDefault(some_default) to get a value or the specified default.
 
