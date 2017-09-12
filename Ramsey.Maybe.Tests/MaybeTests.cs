@@ -14,6 +14,7 @@ namespace Ramsey.Maybe.Tests
             Assert.IsNotNull(something);
         }
 
+
         [TestMethod]
         public void Test_ToMaybe2()
         {
@@ -29,6 +30,16 @@ namespace Ramsey.Maybe.Tests
             Assert.AreEqual(something.ValueOrDefault("a"), "");
         }
 
+
+        [TestMethod]
+        public void Test_ValueOrDefault2()
+        {
+            var nothing = ((string)null).ToMaybe();
+            Assert.AreEqual(nothing.ValueOrDefault("a"), "a");
+            Assert.AreEqual(nothing.ValueOrDefault(), default(string));
+        }
+
+
         [TestMethod]
         public void Test_IsNothing()
         {
@@ -39,13 +50,6 @@ namespace Ramsey.Maybe.Tests
             Assert.IsTrue(nothing.IsNothing());
         }
 
-        [TestMethod]
-        public void Test_ValueOrDefault2()
-        {
-            var nothing = ((string)null).ToMaybe();
-            Assert.AreEqual(nothing.ValueOrDefault("a"), "a");
-            Assert.AreEqual(nothing.ValueOrDefault(), default(string));
-        }
 
         [TestMethod]
         public void Test_Select1()
@@ -57,6 +61,7 @@ namespace Ramsey.Maybe.Tests
             Assert.AreEqual(newSomething, "aa");
         }
 
+
         [TestMethod]
         public void Test_Select2()
         {
@@ -67,6 +72,7 @@ namespace Ramsey.Maybe.Tests
 
             Assert.AreEqual(stillNothing, null);
         }
+
 
         [TestMethod]
         public void Test_Where1()
@@ -85,6 +91,7 @@ namespace Ramsey.Maybe.Tests
             Assert.AreEqual(failFilter, null);
         }
 
+
         [TestMethod]
         public void Test_Where2()
         {
@@ -95,6 +102,7 @@ namespace Ramsey.Maybe.Tests
 
             Assert.AreEqual(stillNothing, null);
         }
+
 
         [TestMethod]
         public void Test_WhereNot1()
@@ -113,6 +121,7 @@ namespace Ramsey.Maybe.Tests
             Assert.AreEqual(failFilter, null);
         }
 
+
         [TestMethod]
         public void Test_WhereNot2()
         {
@@ -123,6 +132,7 @@ namespace Ramsey.Maybe.Tests
 
             Assert.AreEqual(stillNothing, null);
         }
+
 
         [TestMethod]
         public void Test_SelectMany1()
@@ -152,6 +162,7 @@ namespace Ramsey.Maybe.Tests
             Assert.AreEqual(combine(), null);
         }
 
+
         [TestMethod]
         public void Test_QuerySyntax()
         {
@@ -165,14 +176,15 @@ namespace Ramsey.Maybe.Tests
             Assert.AreEqual(x.ValueOrDefault(), "ab");
         }
 
+
         [TestMethod]
         public void Test_ShortCircuitsOnNothings()
         {
-            bool calledFunciton = false;
+            bool calledFunction = false;
 
             string fun(string x)
             {
-                calledFunciton = true;
+                calledFunction = true;
                 return x;
             }
 
@@ -183,12 +195,13 @@ namespace Ramsey.Maybe.Tests
                 from val in s.ToMaybe()
                 select fun(s);
 
-            Assert.AreEqual(calledFunciton, false);
+            Assert.AreEqual(calledFunction, false);
 
+            // now call with value.
             s = "";
             newS = s.ToMaybe().Select(fun);
 
-            Assert.AreEqual(calledFunciton, true);
+            Assert.AreEqual(calledFunction, true);
         }
     }
 }
