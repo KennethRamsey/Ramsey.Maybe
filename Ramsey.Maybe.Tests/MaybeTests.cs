@@ -28,6 +28,7 @@ namespace Ramsey.Maybe.Tests
             var something = "".ToMaybe();
             Assert.AreEqual(something.ValueOrDefault(), "");
             Assert.AreEqual(something.ValueOrDefault("a"), "");
+            Assert.AreEqual(something.ValueOrDefault(() => "a"), "");
         }
 
 
@@ -37,6 +38,7 @@ namespace Ramsey.Maybe.Tests
             var nothing = ((string)null).ToMaybe();
             Assert.AreEqual(nothing.ValueOrDefault("a"), "a");
             Assert.AreEqual(nothing.ValueOrDefault(), default(string));
+            Assert.AreEqual(nothing.ValueOrDefault(() => "a"), "a");
         }
 
 

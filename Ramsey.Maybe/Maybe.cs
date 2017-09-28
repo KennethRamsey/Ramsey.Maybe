@@ -65,6 +65,16 @@ namespace Ramsey.Maybe
             ? val.Value
             : def;
 
+        /// <summary>
+        /// Returns the value inside the maybe, or execute the func and return it's value.
+        /// </summary>        
+        /// <param name="maybe">Value to try and get.</param>
+        /// <param name="def">func to generate return value if object is null. Lazily executed.</param>
+        public static T ValueOrDefault<T>(this Maybe<T> maybe, Func<T> fun) =>
+            maybe is Just<T> val
+            ? val.Value
+            : fun();
+
 
         /// <summary>
         /// Check if a maybe is nothing.
